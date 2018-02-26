@@ -10,12 +10,12 @@
 		7040E90B201F70EC00C96F5D /* CalibrateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7040E90A201F70EC00C96F5D /* CalibrateController.swift */; };
 		70510124201F058800B91A18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70510123201F058800B91A18 /* Assets.xcassets */; };
 		70510127201F078100B91A18 /* ConnectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70510126201F078100B91A18 /* ConnectController.swift */; };
+		7054200A20444EED00D0D2E8 /* timeFramedActivityClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7054200920444EEC00D0D2E8 /* timeFramedActivityClassifier.mlmodel */; };
 		706073972025E5F700B7C428 /* PeripheralListenerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706073962025E5F700B7C428 /* PeripheralListenerDelegate.swift */; };
 		7060739A2025F62B00B7C428 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706073992025F62B00B7C428 /* Constants.swift */; };
 		7060739D20271BC400B7C428 /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7060739C20271BC400B7C428 /* Controller.swift */; };
 		7060739F20272CBC00B7C428 /* SensorTagPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7060739E20272CBC00B7C428 /* SensorTagPeripheral.swift */; };
 		706073A120273B7300B7C428 /* SensorTagDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706073A020273B7300B7C428 /* SensorTagDelegate.swift */; };
-		706073A42027707D00B7C428 /* FaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706073A32027707D00B7C428 /* FaceViewController.swift */; };
 		706073A7202786CB00B7C428 /* 3dassets.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 706073A6202786CB00B7C428 /* 3dassets.scnassets */; };
 		706073A9202787F500B7C428 /* bomberman.dae in Resources */ = {isa = PBXBuildFile; fileRef = 706073A8202787F500B7C428 /* bomberman.dae */; };
 		70892EE0200AAAB30008E63D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70892EDF200AAAB30008E63D /* AppDelegate.swift */; };
@@ -26,6 +26,13 @@
 		70892F00200AAAB30008E63D /* SensorTagRaiderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70892EFF200AAAB30008E63D /* SensorTagRaiderUITests.swift */; };
 		70892F0F200AAB0B0008E63D /* PeripheralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70892F0E200AAB0B0008E63D /* PeripheralManager.swift */; };
 		70892F13200ABCF90008E63D /* BluetoothListenerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70892F12200ABCF90008E63D /* BluetoothListenerDelegate.swift */; };
+		708BECB8204412C700DC4436 /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708BECB6204412C700DC4436 /* Measurement.swift */; };
+		708BECB9204412C700DC4436 /* DataEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708BECB7204412C700DC4436 /* DataEntry.swift */; };
+		708BECC0204412D100DC4436 /* Collector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708BECBC204412D100DC4436 /* Collector.swift */; };
+		708BECC1204412D100DC4436 /* CollectorListenerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708BECBD204412D100DC4436 /* CollectorListenerDelegate.swift */; };
+		708BECC2204412D100DC4436 /* Predictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708BECBF204412D100DC4436 /* Predictor.swift */; };
+		708BECC920442CB800DC4436 /* RecorderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708BECC820442CB800DC4436 /* RecorderController.swift */; };
+		708BECCB20442D1500DC4436 /* FaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708BECCA20442D1400DC4436 /* FaceViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,12 +56,12 @@
 		7040E90A201F70EC00C96F5D /* CalibrateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrateController.swift; sourceTree = "<group>"; };
 		70510123201F058800B91A18 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		70510126201F078100B91A18 /* ConnectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectController.swift; sourceTree = "<group>"; };
+		7054200920444EEC00D0D2E8 /* timeFramedActivityClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = timeFramedActivityClassifier.mlmodel; path = ../../../SensorTagRaiderDataSet/jupyter/timeFramedActivityClassifier.mlmodel; sourceTree = "<group>"; };
 		706073962025E5F700B7C428 /* PeripheralListenerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralListenerDelegate.swift; sourceTree = "<group>"; };
 		706073992025F62B00B7C428 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7060739C20271BC400B7C428 /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
 		7060739E20272CBC00B7C428 /* SensorTagPeripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorTagPeripheral.swift; sourceTree = "<group>"; };
 		706073A020273B7300B7C428 /* SensorTagDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorTagDelegate.swift; sourceTree = "<group>"; };
-		706073A32027707D00B7C428 /* FaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceViewController.swift; sourceTree = "<group>"; };
 		706073A6202786CB00B7C428 /* 3dassets.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = 3dassets.scnassets; sourceTree = "<group>"; };
 		706073A8202787F500B7C428 /* bomberman.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = bomberman.dae; sourceTree = "<group>"; };
 		70892EDC200AAAB30008E63D /* SensorTagRaider.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SensorTagRaider.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +78,13 @@
 		70892F01200AAAB30008E63D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70892F0E200AAB0B0008E63D /* PeripheralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralManager.swift; sourceTree = "<group>"; };
 		70892F12200ABCF90008E63D /* BluetoothListenerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothListenerDelegate.swift; sourceTree = "<group>"; };
+		708BECB6204412C700DC4436 /* Measurement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
+		708BECB7204412C700DC4436 /* DataEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataEntry.swift; sourceTree = "<group>"; };
+		708BECBC204412D100DC4436 /* Collector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collector.swift; sourceTree = "<group>"; };
+		708BECBD204412D100DC4436 /* CollectorListenerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectorListenerDelegate.swift; sourceTree = "<group>"; };
+		708BECBF204412D100DC4436 /* Predictor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Predictor.swift; sourceTree = "<group>"; };
+		708BECC820442CB800DC4436 /* RecorderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecorderController.swift; path = SensorTagRaider/Views/Recorder/RecorderController.swift; sourceTree = SOURCE_ROOT; };
+		708BECCA20442D1400DC4436 /* FaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FaceViewController.swift; path = SensorTagRaider/Views/FaceView/FaceViewController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +142,7 @@
 		706073A52027708300B7C428 /* FaceView */ = {
 			isa = PBXGroup;
 			children = (
-				706073A32027707D00B7C428 /* FaceViewController.swift */,
+				708BECCA20442D1400DC4436 /* FaceViewController.swift */,
 			);
 			name = FaceView;
 			path = "New Group";
@@ -165,6 +179,9 @@
 		70892EDE200AAAB30008E63D /* SensorTagRaider */ = {
 			isa = PBXGroup;
 			children = (
+				7054200920444EEC00D0D2E8 /* timeFramedActivityClassifier.mlmodel */,
+				708BECBA204412D100DC4436 /* Controllers */,
+				708BECB5204412C700DC4436 /* Models */,
 				706073AA2027881600B7C428 /* Assets */,
 				70892F14200AC87F0008E63D /* Views */,
 				70892F0D200AAAEA0008E63D /* Bluetooth */,
@@ -211,11 +228,56 @@
 		70892F14200AC87F0008E63D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				708BECC720442C8300DC4436 /* Recorder */,
 				706073A52027708300B7C428 /* FaceView */,
 				7040E909201F70C700C96F5D /* Calibrate */,
 				70510125201F075000B91A18 /* Connect */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		708BECB5204412C700DC4436 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				708BECB6204412C700DC4436 /* Measurement.swift */,
+				708BECB7204412C700DC4436 /* DataEntry.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		708BECBA204412D100DC4436 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				708BECBB204412D100DC4436 /* Collector */,
+				708BECBE204412D100DC4436 /* Predictor */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		708BECBB204412D100DC4436 /* Collector */ = {
+			isa = PBXGroup;
+			children = (
+				708BECBC204412D100DC4436 /* Collector.swift */,
+				708BECBD204412D100DC4436 /* CollectorListenerDelegate.swift */,
+			);
+			path = Collector;
+			sourceTree = "<group>";
+		};
+		708BECBE204412D100DC4436 /* Predictor */ = {
+			isa = PBXGroup;
+			children = (
+				708BECBF204412D100DC4436 /* Predictor.swift */,
+			);
+			path = Predictor;
+			sourceTree = "<group>";
+		};
+		708BECC720442C8300DC4436 /* Recorder */ = {
+			isa = PBXGroup;
+			children = (
+				708BECC820442CB800DC4436 /* RecorderController.swift */,
+			);
+			name = Recorder;
+			path = "New Group1";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,15 +418,22 @@
 			files = (
 				7060739F20272CBC00B7C428 /* SensorTagPeripheral.swift in Sources */,
 				70510127201F078100B91A18 /* ConnectController.swift in Sources */,
+				708BECC1204412D100DC4436 /* CollectorListenerDelegate.swift in Sources */,
+				708BECB9204412C700DC4436 /* DataEntry.swift in Sources */,
 				70892F0F200AAB0B0008E63D /* PeripheralManager.swift in Sources */,
 				706073A120273B7300B7C428 /* SensorTagDelegate.swift in Sources */,
 				70892EE2200AAAB30008E63D /* ViewController.swift in Sources */,
 				70892EE0200AAAB30008E63D /* AppDelegate.swift in Sources */,
 				7060739D20271BC400B7C428 /* Controller.swift in Sources */,
 				7040E90B201F70EC00C96F5D /* CalibrateController.swift in Sources */,
+				708BECB8204412C700DC4436 /* Measurement.swift in Sources */,
 				706073972025E5F700B7C428 /* PeripheralListenerDelegate.swift in Sources */,
-				706073A42027707D00B7C428 /* FaceViewController.swift in Sources */,
+				708BECC0204412D100DC4436 /* Collector.swift in Sources */,
+				708BECC920442CB800DC4436 /* RecorderController.swift in Sources */,
 				70892F13200ABCF90008E63D /* BluetoothListenerDelegate.swift in Sources */,
+				708BECC2204412D100DC4436 /* Predictor.swift in Sources */,
+				7054200A20444EED00D0D2E8 /* timeFramedActivityClassifier.mlmodel in Sources */,
+				708BECCB20442D1500DC4436 /* FaceViewController.swift in Sources */,
 				7060739A2025F62B00B7C428 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

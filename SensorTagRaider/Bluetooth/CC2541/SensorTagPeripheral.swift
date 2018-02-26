@@ -9,7 +9,7 @@
 import Foundation
 import CoreBluetooth
 
-let DEVICE_NAME = "TI BLE Sensor Tag"
+let DEVICE_NAME = "TI BLE Sensor Tag" // MACOS : "SensorTag"
 
 enum SensorTagError: Error {
     case InvalidDevice
@@ -17,24 +17,35 @@ enum SensorTagError: Error {
 
 class SensorTagPeripheral : NSObject {
     private let sensorTag : CBPeripheral
-    private var enableValue = 1
-    private var enablyBytes : NSData
     
-    private let D = true
+    private var enableValue = 1
+    private var enableGyroValue = 7
+    private var enablyBytes : NSData
+    private var enablGyroBytes : NSData
+    
+    private var fastUpdate = 25 /** [input] * 10ms = 10 * 10ms = 100ms **/
+    private var fastUpdateBytes : NSData
+    
+    private let D = false
     
     private var services = [String : CBService]()
     private var characteristics = [String: CBCharacteristic]()
     
+    private var latestGyro : GyroscopeMeasurement?
+    private var latestMagneto : MagnetometerMeasurement?
+    private var latestAcell : AccelerometerMeasurement?
+    
     var ready = false
     
     var sensorTagDelegate : SensorTagDelegate?
-    
     
     let controller = Controller()
     
     init(device: CBPeripheral) {
         self.sensorTag = device
         self.enablyBytes = NSData(bytes: &enableValue, length: MemoryLayout<UInt8>.size)
+        self.enablGyroBytes = NSData(bytes: &enableGyroValue, length: MemoryLayout<UInt8>.size)
+        self.fastUpdateBytes = NSData(bytes: &fastUpdate, length : MemoryLayout<UInt8>.size)
         super.init()
         self.sensorTag.delegate = self
     }
@@ -48,6 +59,19 @@ class SensorTagPeripheral : NSObject {
     
     func setup(){
         sensorTag.discoverServices(nil)
+    }
+    
+    func calibrate(){
+        if let accel = latestAcell, let gyro = latestGyro, let magneto = latestMagneto {
+            controller.setCalibration(accelValue: [accel.x,accel.y,accel.z],
+                                      magnetoValue: [magneto.x,magneto.y,magneto.z],
+                                      gyroValue: [gyro.x,gyro.y,gyro.z])
+            sensorTagDelegate?.Calibrated(values : controller.getCalibrationValues())
+        }
+    }
+    
+    func readyForCalibration() -> Bool{
+        return latestAcell != nil && latestGyro != nil && latestMagneto != nil
     }
     
     func addCharateristic(_ characteristic : CBCharacteristic) -> Bool {
@@ -78,6 +102,10 @@ extension SensorTagPeripheral {
                 if let dataCharacteristic = self.characteristics[SENSORTAG_CHARACTERISTICS.TI_SENSORTAG_ACCELEROMETER_DATA.uuidString] {
                     sensorTag.setNotifyValue(true, for: dataCharacteristic)
                 }
+                
+                if let periodCharacteristic = self.characteristics[SENSORTAG_CHARACTERISTICS.TI_SENSORTAG_ACCELEROMETER_PERIOD.uuidString] {
+                    sensorTag.writeValue(fastUpdateBytes as Data, for: periodCharacteristic, type: .withResponse)
+                }
             }
         }
     }
@@ -87,10 +115,14 @@ extension SensorTagPeripheral {
             
             
             if let configCharacteristic = self.characteristics[SENSORTAG_CHARACTERISTICS.TI_SENSORTAG_GYROSCOPE_CONFIG.uuidString] {
-                sensorTag.writeValue(enablyBytes as Data, for: configCharacteristic, type: .withResponse)
+                sensorTag.writeValue(enablGyroBytes as Data, for: configCharacteristic, type: .withResponse)
                 
                 if let dataCharacteristic = self.characteristics[SENSORTAG_CHARACTERISTICS.TI_SENSORTAG_GYROSCOPE_DATA.uuidString] {
                     sensorTag.setNotifyValue(true, for: dataCharacteristic)
+                }
+                
+                if let periodCharacteristic = self.characteristics[SENSORTAG_CHARACTERISTICS.TI_SENSORTAG_GYROSCOPE_PERIOD.uuidString] {
+                    sensorTag.writeValue(fastUpdateBytes as Data, for: periodCharacteristic, type: .withResponse)
                 }
             }
             
@@ -105,6 +137,10 @@ extension SensorTagPeripheral {
                 
                 if let dataCharacteristic = self.characteristics[SENSORTAG_CHARACTERISTICS.TI_SENSORTAG_MAGNETOMETER_DATA.uuidString] {
                     sensorTag.setNotifyValue(true, for: dataCharacteristic)
+                }
+                
+                if let periodCharacteristic = self.characteristics[SENSORTAG_CHARACTERISTICS.TI_SENSORTAG_MAGNETOMETER_PERIOD.uuidString] {
+                    sensorTag.writeValue(fastUpdateBytes as Data, for: periodCharacteristic, type: .withResponse)
                 }
             }
             
@@ -142,7 +178,7 @@ extension SensorTagPeripheral : CBPeripheralDelegate {
                 if(D){print("\(characteristic.uuid.uuidString)")}
             }
             
-            sensorTagDelegate?.ready()
+            sensorTagDelegate?.Ready()
             ready = true
         }
     }
@@ -154,13 +190,19 @@ extension SensorTagPeripheral : CBPeripheralDelegate {
         
         if(error == nil){
             if characteristic.uuid == SENSORTAG_CHARACTERISTICS.TI_SENSORTAG_ACCELEROMETER_DATA {
-                sensorTagDelegate?.Accelerometer(values: controller.getAccelerometerData(value: characteristic.value! as NSData ))
+                latestAcell = controller.getAccelerometerData(value: characteristic.value! as NSData )
+                sensorTagDelegate?.Accelerometer(measurement: latestAcell!)
             }
             if characteristic.uuid == SENSORTAG_CHARACTERISTICS.TI_SENSORTAG_MAGNETOMETER_DATA {
-                sensorTagDelegate?.Magnetometer(values: controller.getMagnetometerData(value: characteristic.value! as NSData ))
+                latestMagneto = controller.getMagnetometerData(value: characteristic.value! as NSData )
+                sensorTagDelegate?.Magnetometer(measurement: latestMagneto!)
             }
             if characteristic.uuid == SENSORTAG_CHARACTERISTICS.TI_SENSORTAG_GYROSCOPE_DATA {
-                sensorTagDelegate?.Gyroscope(values: controller.getGyroscopeData(value: characteristic.value! as NSData ))
+                latestGyro = controller.getGyroscopeData(value: characteristic.value! as NSData )
+                sensorTagDelegate?.Gyroscope(measurement: latestGyro!)
+            }
+            if(readyForCalibration()){
+                sensorTagDelegate?.ReadyForCalibration()
             }
         }
     }

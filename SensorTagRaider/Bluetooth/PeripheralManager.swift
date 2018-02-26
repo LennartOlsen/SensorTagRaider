@@ -10,16 +10,6 @@ import Foundation
 import CoreBluetooth
 
 
-enum PDNotificationType:String{
-    case newPeripheralsDiscovered
-    case peripheralStateChanged
-    case serviceDiscovered
-    case characteristicDiscovered
-    case allServicesAndCharacteristicsDiscovered
-    case discriptorUpdated
-    case valueUpdated
-}
-
 class PeripheralManager : NSObject, CBCentralManagerDelegate {
     
     private var D = false
@@ -30,7 +20,7 @@ class PeripheralManager : NSObject, CBCentralManagerDelegate {
     
     var central:CBCentralManager?
     
-    var lisenterDelegate: BluetoothListenerDelegate?
+    var listenerDelegate: BluetoothListenerDelegate?
     
     var discoveredDevices:[UUID:CBPeripheral] = [:]
     
@@ -72,7 +62,7 @@ extension PeripheralManager {
         else
         {
             // do something like alert the user that ble is not on
-            if(D){print("PeripheralDiscoverer: didUpdateState \(central.state)")}
+            if(D){print("PeripheralDiscoverer: didUpdateState \(central.state.rawValue)")}
         }
     }
     
@@ -86,7 +76,7 @@ extension PeripheralManager {
         if(D){print("PeripheralDiscoverer: didDiscoverPeripheral: \(id.uuidString) \(String(describing: peripheral.name))")}
         
     
-        lisenterDelegate?.didDiscover(peripheralDevice: peripheral)
+        listenerDelegate?.didDiscover(peripheralDevice: peripheral)
         
     }
     
@@ -95,7 +85,7 @@ extension PeripheralManager {
         if(D){print("PeripheralDiscoverer: didConnectPeripheral: \(peripheral.state.rawValue)")}
         
         
-        lisenterDelegate?.didConnect(peripheralDevice: peripheral)
+        listenerDelegate?.didConnect(peripheralDevice: peripheral)
     }
     
     //MARK: --- didDisconnect ---

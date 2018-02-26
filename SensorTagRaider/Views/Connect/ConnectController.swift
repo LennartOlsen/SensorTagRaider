@@ -22,7 +22,7 @@ class ConnectController: UIViewController, BluetoothListenerDelegate {
     private var discoveredDevice : CBPeripheral!
     private var connectedDevice : CBPeripheral!
     
-    private let D = true
+    private let D = false
     
     var devices: [UUID : CBPeripheral] = [:]
     
@@ -62,9 +62,6 @@ class ConnectController: UIViewController, BluetoothListenerDelegate {
     }
     
     func didConnect(peripheralDevice: CBPeripheral) {
-        if(D) {
-            print("did connect", peripheralDevice)
-        }
         
         if SensorTagPeripheral.validateSensorTag(device: peripheralDevice) {
             informationLabel.text = "Device Connected"
@@ -76,7 +73,7 @@ class ConnectController: UIViewController, BluetoothListenerDelegate {
     }
     
     func configure(){
-        pm.lisenterDelegate = self
+        pm.listenerDelegate = self
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

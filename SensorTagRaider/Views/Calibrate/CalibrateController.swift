@@ -18,11 +18,14 @@ class CalibrateController: UIViewController {
     
     @IBOutlet weak var faceView: SCNView!
     
+    @IBOutlet weak var calibrateButton: UIButton!
+    
     var fvc : FaceViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        calibrateButton.isEnabled = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,32 +38,42 @@ class CalibrateController: UIViewController {
         device.setup()
         fvc = FaceViewController(scene : faceView)
     }
+    
+    @IBAction func doCalibrate(_ sender: Any) {
+        device.calibrate()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is RecorderController {
+            if let d = device {
+                let vc = segue.destination as! RecorderController
+                vc.device = d
+            }
+        }
+    }
 }
 extension CalibrateController : SensorTagDelegate {
-    
-    func errored() {
+    func Ready(){
+        infoLabel.text = "Ready"
+        device.listenForAccelerometer()
+        device.listenForGyroscope()
+        device.listenForMagnetometer()
+    }
+    func Errored() {
         infoLabel.text = "Error"
     }
     
-    func ready() {
-        infoLabel.text = "Ready"
-        device.listenForAccelerometer()
-        //device.listenForGyroscope()
-        //device.listenForMagnetometer()
-        
+    func Accelerometer(measurement : AccelerometerMeasurement) {}
+    
+    func Magnetometer(measurement : MagnetometerMeasurement) {}
+    
+    func Gyroscope(measurement : GyroscopeMeasurement){}
+    
+    func Calibrated(values : [[Double]]){
+        performSegue(withIdentifier: "recorderSegue", sender: self)
     }
     
-    func Accelerometer(values: [Double]) {
-        print("Accellerometer \(values)")
-        fvc.rotate(x: values[0], y: values[1], z: values[2])
-    }
-    func Magnetometer(values: [Double]) {
-        print("Magnetometer \(values)")
-        //fvc.rotate(x: values[0], y: values[1], z: values[2])
-    }
-    
-    func Gyroscope(values: [Double]) {
-        print("Gyro \(values)")
-        fvc.rotate(x: values[0], y: values[1], z: values[2])
+    func ReadyForCalibration() {
+        calibrateButton.isEnabled = true
     }
 }

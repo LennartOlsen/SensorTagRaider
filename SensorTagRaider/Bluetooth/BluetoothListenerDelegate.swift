@@ -11,8 +11,6 @@ import CoreBluetooth
 
 protocol BluetoothListenerDelegate {
     
-    var devices:[UUID:CBPeripheral] { get }
-    
     /** When  discovering One new device **/
     func didDiscover(peripheralDevice : CBPeripheral)
     

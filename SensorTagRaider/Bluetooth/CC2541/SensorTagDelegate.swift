@@ -9,12 +9,16 @@
 import Foundation
 
 protocol SensorTagDelegate {
-    func ready()
-    func errored()
+    func Ready()
+    func Errored()
     
-    func Accelerometer(values : [Double])
+    func Accelerometer(measurement : AccelerometerMeasurement)
     
-    func Magnetometer(values : [Double])
+    func Magnetometer(measurement : MagnetometerMeasurement)
     
-    func Gyroscope(values : [Double])
+    func Gyroscope(measurement : GyroscopeMeasurement)
+    
+    func ReadyForCalibration()
+    
+    func Calibrated(values : [[Double]]) /** Accelerometer, magnetometer, Gyroscope, all x,y,z **/
 }
